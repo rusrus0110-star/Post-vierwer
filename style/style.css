@@ -140,13 +140,11 @@ body {
 }
 
 @media (max-width: 640px) {
-  body {
+  .app {
     padding-top: 6rem;
     padding-bottom: 4rem;
     min-height: 100dvh;
-  }
-  .app {
-    padding: 16px;
+    padding: 1.6rem;
   }
 
   .post-header,
@@ -166,7 +164,7 @@ body {
 }
 
 @media (max-width: 420px) {
-  body {
+  .app {
     padding-top: 7rem;
   }
   .content {
