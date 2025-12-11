@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1 class="app-title">Posts viewer</h1>
+
+      <div class="search-wrapper">
+        <label for="search-input">Search (title, body):</label>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Type to search..."
+          autocomplete="off"
+        />
+      </div>
+
+      <section class="post-card">
+        <div class="post-header">
+          <h2 id="post-title">Loading...</h2>
+        </div>
+        <div class="post-body">
+          <p id="post-body">Please wait while we load posts from the server.</p>
+        </div>
+
+        <div class="post-meta">
+          <span id="post-counter">0 / 0</span>
+        </div>
+      </section>
+
+      <div class="controls">
+        <button id="prev-btn" class="btn" disabled>&lt; Prev</button>
+        <button id="next-btn" class="btn" disabled>Next &gt;</button>
+      </div>
+
+      <div id="loader" class="loader hidden">Loading...</div>
+    </main>
+  </body>
+  <script src="script.js"></script>
+</html>
