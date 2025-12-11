@@ -3,7 +3,6 @@ const BASE_URL = "https://jsonplaceholder.typicode.com/posts";
 let allPosts = [];
 let filteredPosts = [];
 let currentIndex = 0;
-let isLoading = false;
 
 const titleEl = document.getElementById("post-title");
 const bodyEl = document.getElementById("post-body");
@@ -104,32 +103,30 @@ async function getPosts() {
 }
 
 // event listeners
+// защита от быстрых кликов
+let clickLock = false;
+function lockButtons(ms = 250) {
+  clickLock = true;
+  prevBtn.disabled = true;
+  nextBtn.disabled = true;
+  setTimeout(() => {
+    clickLock = false;
+    updateButtons();
+  }, ms);
+}
 
 prevBtn.addEventListener("click", () => {
-  if (isLoading || currentIndex <= 0) return;
-
-  isLoading = true;
-  currentIndex -= 1;
+  if (clickLock || currentIndex <= 0) return;
+  currentIndex--;
   renderPost();
-
-  // save in localStorage
-  localStorage.setItem("currentPostId", String(filteredPosts[currentIndex].id));
-
-  isLoading = false;
+  lockButtons();
 });
 
-//
 nextBtn.addEventListener("click", () => {
-  if (isLoading || currentIndex >= filteredPosts.length - 1) return;
-
-  isLoading = true;
-  currentIndex += 1;
+  if (clickLock || currentIndex >= filteredPosts.length - 1) return;
+  currentIndex++;
   renderPost();
-
-  //save in localStorage
-  localStorage.setItem("currentPostId", String(filteredPosts[currentIndex].id));
-
-  isLoading = false;
+  lockButtons();
 });
 
 // search
