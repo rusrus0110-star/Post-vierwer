@@ -105,37 +105,30 @@ async function getPosts() {
 
 // event listeners
 
-prevBtn.addEventListener("click", async () => {
+prevBtn.addEventListener("click", () => {
   if (isLoading || currentIndex <= 0) return;
 
   isLoading = true;
-  prevBtn.disabled = true;
-  nextBtn.disabled = true;
   currentIndex -= 1;
   renderPost();
 
-  await new Promise(requestAnimationFrame);
-  await new Promise(requestAnimationFrame);
+  // save in localStorage
+  localStorage.setItem("currentPostId", String(filteredPosts[currentIndex].id));
 
-  prevBtn.disabled = false;
-  nextBtn.disabled = false;
   isLoading = false;
 });
 
-nextBtn.addEventListener("click", async () => {
+//
+nextBtn.addEventListener("click", () => {
   if (isLoading || currentIndex >= filteredPosts.length - 1) return;
 
   isLoading = true;
-  prevBtn.disabled = true;
-  nextBtn.disabled = true;
-
   currentIndex += 1;
   renderPost();
-  await new Promise(requestAnimationFrame);
-  await new Promise(requestAnimationFrame);
 
-  prevBtn.disabled = false;
-  nextBtn.disabled = false;
+  //save in localStorage
+  localStorage.setItem("currentPostId", String(filteredPosts[currentIndex].id));
+
   isLoading = false;
 });
 
