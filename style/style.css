@@ -141,7 +141,6 @@ body {
 
 @media (max-width: 640px) {
   .app {
-    min-height: 100vh;
     margin-top: 2rem;
     padding-top: 6rem;
     padding-bottom: 4rem;
@@ -153,9 +152,6 @@ body {
   .post-meta {
     padding-left: 12px;
     padding-right: 12px;
-  }
-  .post-card {
-    min-height: 50vh;
   }
 
   #post-title {
