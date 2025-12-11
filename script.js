@@ -3,6 +3,7 @@ const BASE_URL = "https://jsonplaceholder.typicode.com/posts";
 let allPosts = [];
 let filteredPosts = [];
 let currentIndex = 0;
+let isLoading = false;
 
 const titleEl = document.getElementById("post-title");
 const bodyEl = document.getElementById("post-body");
@@ -104,18 +105,38 @@ async function getPosts() {
 
 // event listeners
 
-prevBtn.addEventListener("click", () => {
-  if (currentIndex <= 0) return;
+prevBtn.addEventListener("click", async () => {
+  if (isLoading || currentIndex <= 0) return;
 
+  isLoading = true;
+  prevBtn.disabled = true;
+  nextBtn.disabled = true;
   currentIndex -= 1;
   renderPost();
+
+  await new Promise(requestAnimationFrame);
+  await new Promise(requestAnimationFrame);
+
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
+  isLoading = false;
 });
 
-nextBtn.addEventListener("click", () => {
-  if (currentIndex >= filteredPosts.length - 1) return;
+nextBtn.addEventListener("click", async () => {
+  if (isLoading || currentIndex >= filteredPosts.length - 1) return;
+
+  isLoading = true;
+  prevBtn.disabled = true;
+  nextBtn.disabled = true;
 
   currentIndex += 1;
   renderPost();
+  await new Promise(requestAnimationFrame);
+  await new Promise(requestAnimationFrame);
+
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
+  isLoading = false;
 });
 
 // search
